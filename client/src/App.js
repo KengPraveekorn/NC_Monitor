@@ -9,6 +9,7 @@ import Footer from './components/Footer';
 
 // Page
 import Addpage from './components/pages/Addpage';
+// import postaxios from './components/functions/postaxios'
 
 function App() {
   return(
@@ -18,6 +19,7 @@ function App() {
         <Routes>
           <Route path='/' element={<Content/>}/>
           <Route path='/addnc' element={<Addpage/>}/>
+          {/* <Route path='/post' element={<postaxios/>}/> */}
         </Routes>
       </BrowserRouter>
       <Footer/>

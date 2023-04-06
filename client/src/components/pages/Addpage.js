@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Button, Form, Modal } from "react-bootstrap";
 import Swal from "sweetalert2";
+import postaxios from "../functions/postaxios";
 
 const Addpage = () => {
   //   const handdleClick = async () => {
@@ -78,6 +79,7 @@ const Addpage = () => {
 
   return (
     <div className="d-grid">
+      <postaxios/>
       <Button variant="success" onClick={handleShow}>
         Submit
       </Button>
