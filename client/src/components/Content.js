@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { Card, Col, Form, Row, Table, Button, Modal, Container } from "react-bootstrap";
-// import DataTable from "react-data-table-component";
 import axios from "axios";
 import Swal from "sweetalert2";
+
+import Addpage from "./pages/Addpage";
 
 
 // api
@@ -45,13 +46,11 @@ const Content = () => {
     handleClose();
     Swal.fire({
       title: "Do you want to save the changes?",
-      // text: JSON.stringify(formValues),
       showDenyButton: true,
       showCancelButton: true,
       confirmButtonText: "Save",
       denyButtonText: `Don't save`,
     }).then((result) => {
-      /* Read more about isConfirmed, isDenied below */
       if (result.isConfirmed) {
         Swal.fire("Saved!", "", "success");
       } else if (result.isDenied) {
@@ -59,25 +58,6 @@ const Content = () => {
       }
     });
   };
-
-  //   const columns = [
-  //     {
-  //         name: 'NCR NO',
-  //         selector: row => row.ncr_no,
-  //     },
-  //     {
-  //         name: 'Detect on',
-  //         selector: row => row.detect_on,
-  //     },
-  //     {
-  //         name: 'Detect at',
-  //         selector: row => row.detect_at,
-  //     },
-  //     {
-  //         name: 'NC datail',
-  //         selector: row => row.nc_detail,
-  //     },
-  // ];
 
   return (
     <Container>
@@ -89,15 +69,12 @@ const Content = () => {
           onChange={(e) => setQ(e.target.value)}
         />
       </Form>
-      <div className="d-grid">
-        <Button variant="success" size="lg" onClick={handleShow}>
-          ADD +
-        </Button>
-      </div>
+      <Form className="mb-3">
+        <Addpage/>
+      </Form>
       <Form>
         <Row>
           <Col xs={8}>
-            {/* <DataTable columns={columns} data={serachData(value)}/> */}
             <Table striped bordered hover>
               <thead>
                 <tr>
@@ -105,6 +82,7 @@ const Content = () => {
                   <th>Detect on</th>
                   <th>Detect at</th>
                   <th>NC datail</th>
+                  <th></th>
                 </tr>
               </thead>
               {searchData(value).map((item) => {
@@ -115,6 +93,7 @@ const Content = () => {
                       <td>{item.detect_on}</td>
                       <td>{item.detect_at}</td>
                       <td>{item.nc_detail}</td>
+                      <td><Button variant="danger">Delete</Button></td>
                     </tr>
                   </tbody>
                 );
