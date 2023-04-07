@@ -1,24 +1,28 @@
 import React, { useEffect, useState } from "react";
-import { Card, Col, Form, Row, Table, Button, Modal, Container } from "react-bootstrap";
+import {
+  Card,
+  Col,
+  Form,
+  Row,
+  Table,
+  Button,
+  Container,
+} from "react-bootstrap";
 import axios from "axios";
 import Swal from "sweetalert2";
 
+// pages element
 import Addpage from "./pages/Addpage";
 
-
-// api
-const urls = "http://localhost:5000/api/ncmoni";
+// routes auth
+import { removenc } from "./functions/auth";
+import { listnc } from "./functions/auth";
 
 const Content = () => {
   const [value, setValue] = useState([]);
+
   const [q, setQ] = useState("");
-
   const [serachParam] = useState(["ncr_no"]);
-
-  const [show, setShow] = useState(false);
-
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
 
   useEffect(() => {
     loadData();
@@ -26,8 +30,8 @@ const Content = () => {
   }, []);
 
   const loadData = () => {
-    axios.get(urls).then((res) => {
-      console.log("res", res.data);
+    listnc().then((res) => {
+      console.log(res.data);
       setValue(res.data);
     });
   };
@@ -42,21 +46,15 @@ const Content = () => {
     });
   };
 
-  const handdleClick = () => {
-    handleClose();
-    Swal.fire({
-      title: "Do you want to save the changes?",
-      showDenyButton: true,
-      showCancelButton: true,
-      confirmButtonText: "Save",
-      denyButtonText: `Don't save`,
-    }).then((result) => {
-      if (result.isConfirmed) {
-        Swal.fire("Saved!", "", "success");
-      } else if (result.isDenied) {
-        Swal.fire("Changes are not saved", "", "info");
-      }
-    });
+  const handdleRemove = (id) => {
+    removenc(id)
+      .then(() => {
+        console.log(id);
+        loadData();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   return (
@@ -69,8 +67,8 @@ const Content = () => {
           onChange={(e) => setQ(e.target.value)}
         />
       </Form>
-      <Form className="mb-3">
-        <Addpage/>
+      <Form className="mb-4">
+        <Addpage />
       </Form>
       <Form>
         <Row>
@@ -93,7 +91,23 @@ const Content = () => {
                       <td>{item.detect_on}</td>
                       <td>{item.detect_at}</td>
                       <td>{item.nc_detail}</td>
-                      <td><Button variant="danger">Delete</Button></td>
+                      <td>
+                        <Form className="mt-2">
+                          <Row>
+                            <Col >
+                              <Button>Update</Button>
+                            </Col>
+                            <Col >
+                              <Button
+                                variant="danger"
+                                onClick={() => handdleRemove(item._id)}
+                              >
+                                Delete
+                              </Button>
+                            </Col>
+                          </Row>
+                        </Form>
+                      </td>
                     </tr>
                   </tbody>
                 );
@@ -111,42 +125,6 @@ const Content = () => {
           </Col>
         </Row>
       </Form>
-      <Modal size="lg" show={show} onHide={handleClose}>
-        <Modal.Header closeButton>
-          <Modal.Title>NCR FORM</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <Form>
-            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-              <Form.Label>NCR NO</Form.Label>
-              <Form.Control type="text" placeholder="Enter NCR NO" autoFocus />
-            </Form.Group>
-            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-              <Form.Label>Detech On</Form.Label>
-              <Form.Control type="text" placeholder="Enter Detech On" autoFocus />
-            </Form.Group>
-            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-              <Form.Label>Detech At</Form.Label>
-              <Form.Control type="text" placeholder="Enter Detech At" autoFocus />
-            </Form.Group>
-            <Form.Group
-              className="mb-3"
-              controlId="exampleForm.ControlTextarea1"
-            >
-              <Form.Label>NC Detail</Form.Label>
-              <Form.Control as="textarea" rows={3} placeholder="Enter NC Detail"/>
-            </Form.Group>
-          </Form>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-            Close
-          </Button>
-          <Button variant="primary" onClick={handdleClick}>
-            Save Changes
-          </Button>
-        </Modal.Footer>
-      </Modal>
     </Container>
   );
 };

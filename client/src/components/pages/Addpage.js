@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Swal from "sweetalert2";
 import { Form, Button, Modal } from "react-bootstrap";
 
 // functions
-import { addnc } from "../functions/addpost";
+import { addnc } from "../functions/auth";
 
 const Addpage = () => {
   const [show, setShow] = useState(false);
@@ -31,7 +31,7 @@ const Addpage = () => {
       [e.target.name]: e.target.value,
     });
   };
-  console.log(data);
+  // console.log(data);
 
   const handdleSave = () => {
     handleClose();
