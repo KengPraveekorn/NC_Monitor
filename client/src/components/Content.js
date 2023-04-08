@@ -8,15 +8,13 @@ import {
   Button,
   Container,
 } from "react-bootstrap";
-import axios from "axios";
-import Swal from "sweetalert2";
 
 // pages element
 import Addpage from "./pages/Addpage";
+import Detail from "./pages/Detail";
 
 // routes auth
-import { removenc } from "./functions/auth";
-import { listnc } from "./functions/auth";
+import { removenc,listnc,updatenc } from "./functions/auth";
 
 const Content = () => {
   const [value, setValue] = useState([]);
@@ -57,6 +55,17 @@ const Content = () => {
       });
   };
 
+  const handdleUpdate = (id)=>{
+    console.log(id);
+    <Detail/>
+    // updatenc(id).then(()=>{
+    //   console.log(id);
+    //   loadData();
+    // }).catch((err)=>{
+    //   console.log(err);
+    // })
+  }
+
   return (
     <Container>
       <Form className="mb-3">
@@ -94,10 +103,10 @@ const Content = () => {
                       <td>
                         <Form className="mt-2">
                           <Row>
-                            <Col >
-                              <Button>Update</Button>
+                            <Col>
+                              <Button onClick={()=>handdleUpdate(item._id)}>Detail</Button>
                             </Col>
-                            <Col >
+                            <Col>
                               <Button
                                 variant="danger"
                                 onClick={() => handdleRemove(item._id)}

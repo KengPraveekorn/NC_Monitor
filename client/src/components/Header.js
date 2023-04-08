@@ -8,7 +8,7 @@ import {
 
 const Header = () => {
   return (
-    <Navbar bg="light" expand="lg">
+    <Navbar bg="light" expand="lg" className="mb-4">
       <Container>
         <Navbar.Brand>NC-Monitor</Navbar.Brand>
         {/* <Navbar.Toggle aria-controls="basic-navbar-nav" /> */}

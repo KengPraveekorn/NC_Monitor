@@ -16,7 +16,7 @@ exports.create = async(req,res)=>{
 // List (Get)
 exports.list = async(req,res)=>{
     try{
-        const listNCmoni = await Nc_moni.find({}).exec()
+        const listNCmoni = await Nc_moni.find({}).sort({"_id":-1.0}).exec()
         res.json(listNCmoni)
     }catch(err){
         console.log(err);
