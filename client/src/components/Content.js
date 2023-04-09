@@ -7,20 +7,23 @@ import {
   Table,
   Button,
   Container,
+  Modal,
 } from "react-bootstrap";
 
 // pages element
 import Addpage from "./pages/Addpage";
-import Detail from "./pages/Detail";
+// import Detail from "./pages/Detail";
 
 // routes auth
-import { removenc,listnc,updatenc } from "./functions/auth";
+import { removenc, listnc, updatenc } from "./functions/auth";
 
 const Content = () => {
   const [value, setValue] = useState([]);
 
   const [q, setQ] = useState("");
   const [serachParam] = useState(["ncr_no"]);
+
+  const [show, setShow] = useState(false);
 
   useEffect(() => {
     loadData();
@@ -55,16 +58,19 @@ const Content = () => {
       });
   };
 
-  const handdleUpdate = (id)=>{
+  const handdleUpdate = (id) => {
     console.log(id);
-    <Detail/>
+    setShow(true);
+    
     // updatenc(id).then(()=>{
     //   console.log(id);
     //   loadData();
     // }).catch((err)=>{
     //   console.log(err);
     // })
-  }
+  };
+
+  const handleClose = () => setShow(false);
 
   return (
     <Container>
@@ -104,7 +110,9 @@ const Content = () => {
                         <Form className="mt-2">
                           <Row>
                             <Col>
-                              <Button onClick={()=>handdleUpdate(item._id)}>Detail</Button>
+                              <Button onClick={() => handdleUpdate(item._id)}>
+                                Detail
+                              </Button>
                             </Col>
                             <Col>
                               <Button
@@ -134,6 +142,38 @@ const Content = () => {
           </Col>
         </Row>
       </Form>
+
+      {value.map((item) => {
+        return (
+          <Modal
+            size="lg"
+            aria-labelledby="contained-modal-title-vcenter"
+            centered
+            show={show}
+            onHide={handleClose}
+          >
+            <Modal.Header closeButton>
+              <Modal.Title id="contained-modal-title-vcenter">
+                Detail
+              </Modal.Title>
+            </Modal.Header>
+            <Modal.Body >
+              <h4>NCR_NO</h4>
+              <p>id: {item.ncr_no}</p>
+              <h4>Detech On</h4>
+              <p>{item.detect_on}</p>
+              <h4>Detech At</h4>
+              <p>{item.detect_at}</p>
+              <h4>NC Detail</h4>
+              <p>{item.nc_detail}</p>
+            </Modal.Body>
+
+            <Modal.Footer>
+              <Button onClick={handleClose}>Close</Button>
+            </Modal.Footer>
+          </Modal>
+        );
+      })}
     </Container>
   );
 };

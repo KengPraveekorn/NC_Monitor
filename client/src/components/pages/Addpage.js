@@ -4,6 +4,7 @@ import { Form, Button, Modal } from "react-bootstrap";
 
 // functions
 import { addnc } from "../functions/auth";
+import Detail from "./Detail";
 
 const Addpage = () => {
   const [show, setShow] = useState(false);
