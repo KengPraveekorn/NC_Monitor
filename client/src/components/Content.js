@@ -10,6 +10,9 @@ import {
   Modal,
 } from "react-bootstrap";
 
+// CSS
+import "./styles/content.css";
+
 // pages element
 import Addpage from "./pages/Addpage";
 // import Detail from "./pages/Detail";
@@ -61,7 +64,7 @@ const Content = () => {
   const handdleUpdate = (id) => {
     console.log(id);
     setShow(true);
-    
+
     // updatenc(id).then(()=>{
     //   console.log(id);
     //   loadData();
@@ -74,17 +77,21 @@ const Content = () => {
 
   return (
     <Container>
-      <Form className="mb-3">
-        <Form.Control
-          type="text"
-          placeholder="Serach Lotno"
-          value={q}
-          onChange={(e) => setQ(e.target.value)}
-        />
-      </Form>
-      <Form className="mb-4">
-        <Addpage />
-      </Form>
+      <div className="d-grid">
+        <Form className="search">
+          <img src="/search.png" alt="" className="imgSeach" />
+          <Form.Control
+            className="form-search"
+            type="search"
+            placeholder="Search Lotno"
+            value={q}
+            onChange={(e) => setQ(e.target.value)}
+          />
+        </Form>
+        <Form className="addpos">
+          <Addpage />
+        </Form>
+      </div>
       <Form>
         <Row>
           <Col xs={8}>
@@ -143,7 +150,32 @@ const Content = () => {
         </Row>
       </Form>
 
-      {value.map((item) => {
+      <Modal
+        size="lg"
+        aria-labelledby="contained-modal-title-vcenter"
+        centered
+        show={show}
+        onHide={handleClose}
+      >
+        <Modal.Header closeButton>
+          <Modal.Title id="contained-modal-title-vcenter">Detail</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+              <h4>NCR_NO</h4>
+              <p>id: </p>
+              <h4>Detech On</h4>
+              <p></p>
+              <h4>Detech At</h4>
+              <p></p>
+              <h4>NC Detail</h4>
+              <p></p>
+            </Modal.Body>
+            <Modal.Footer>
+              <Button onClick={handleClose}>Close</Button>
+            </Modal.Footer>
+      </Modal>
+
+      {/* {value.map((item) => {
         return (
           <Modal
             size="lg"
@@ -157,7 +189,7 @@ const Content = () => {
                 Detail
               </Modal.Title>
             </Modal.Header>
-            <Modal.Body >
+            <Modal.Body>
               <h4>NCR_NO</h4>
               <p>id: {item.ncr_no}</p>
               <h4>Detech On</h4>
@@ -173,7 +205,8 @@ const Content = () => {
             </Modal.Footer>
           </Modal>
         );
-      })}
+      })} */}
+
     </Container>
   );
 };

@@ -31,7 +31,9 @@ const Detail = (props) => {
 
         <Modal.Body>
           <h4>NCR_NO</h4>
-          <p></p>
+          <p>Cras mattis consectetur purus sit amet fermentum. Cras justo odio,
+            dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta
+            ac consectetur ac, vestibulum at eros.</p>
           <h4>Detech On</h4>
           <p>
             Cras mattis consectetur purus sit amet fermentum. Cras justo odio,

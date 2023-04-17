@@ -4,7 +4,10 @@ import { Form, Button, Modal } from "react-bootstrap";
 
 // functions
 import { addnc } from "../functions/auth";
-import Detail from "./Detail";
+// import Detail from "./Detail";
+
+// CSS
+import '../styles/content.css'
 
 const Addpage = () => {
   const [show, setShow] = useState(false);
@@ -19,11 +22,14 @@ const Addpage = () => {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  const handleSumbit = (e) => {
+  const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
+  const handleSumbit = async (e) => {
     // e.preventDefault();    // ไม่อยากให้ Refresh หน้า
     console.log(data);
     addnc(data);
-    // window.location.reload(true);
+    await delay(1000);
+    window.location.reload(true);
   };
 
   const handleChange = (e) => {
@@ -37,7 +43,7 @@ const Addpage = () => {
   const handdleSave = () => {
     handleClose();
     Swal.fire({
-      title: "Do you want to save the changes?", 
+      title: "Do you want to save the changes?",
       text: JSON.stringify(data),
       showDenyButton: true,
       showCancelButton: true,
@@ -45,7 +51,11 @@ const Addpage = () => {
       denyButtonText: `Don't save`,
     }).then((result) => {
       if (result.isConfirmed) {
-        Swal.fire("Saved!", "", "success");
+        Swal.fire({
+          title: "Saved!",
+          icon: "success",
+          showConfirmButton: false,
+        });
         handleSumbit();
       } else if (result.isDenied) {
         Swal.fire("Changes are not saved", "", "info");
@@ -55,14 +65,15 @@ const Addpage = () => {
 
   return (
     <div>
-      <div className="d-grid">
-        <Button variant="success" size="lg" onClick={handleShow}>
+      <div >
+        <Button className="bt-add" onClick={handleShow}>
           ADD +
         </Button>
       </div>
 
       <Modal size="lg" show={show} onHide={handleClose}>
-        <Modal.Header closeButton>
+        <Modal.Header className="headform" closeButton>
+          <img className="imgform" src="./checklist.png" alt=""/>
           <Modal.Title>NCR FORM</Modal.Title>
         </Modal.Header>
         <Modal.Body>

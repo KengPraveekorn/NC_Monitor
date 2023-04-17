@@ -1,0 +1,16 @@
+.pos{
+    margin-bottom: 20px;
+    background-color: rgb(255, 232, 232);
+}
+
+.fsize{
+    font-size: 25px;
+    font-weight: 700;
+    color: red;
+}
+
+.img{
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
+}

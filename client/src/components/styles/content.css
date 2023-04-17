@@ -1,0 +1,44 @@
+.d-grid{
+    margin-bottom: 20px;
+    display: grid;
+    grid-template-columns: 250px auto;
+    /* align-content: center; */
+    /* justify-content: center; */
+}
+
+.search{
+    width: 200px;
+}
+
+.form-search{
+    margin-left: 50px;
+    /* position: relative; */
+}
+
+.imgSeach{
+    width: 25px;
+    height: 25px;
+    display: flex;
+    position: absolute;
+    top:95px;
+    left: auto;
+}
+
+
+/* Add page */
+.addpos{
+    margin-left: auto;
+}
+.bt-add{
+    background-color:rgb(65, 155, 5);
+    width: 415px;
+}
+
+.headform{
+    background-color:antiquewhite;
+}
+.imgform{
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+}

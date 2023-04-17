@@ -1,16 +1,23 @@
 import React from "react";
-import { 
-    Container, 
-    Nav, 
-    Navbar, 
-    NavDropdown } from "react-bootstrap";
+import { Container, Nav, Navbar, NavDropdown } from "react-bootstrap";
 
+// CSS
+import "./styles/header.css";
 
 const Header = () => {
+  
+  const handleRefresh = ()=>{
+    window.location.reload(true);
+  }
+
   return (
-    <Navbar bg="light" expand="lg" className="mb-4">
+    // <Navbar bg="light" expand="lg" className="mb-4">
+    <Navbar className="pos">
       <Container>
-        <Navbar.Brand>NC-Monitor</Navbar.Brand>
+        <Navbar.Brand className="fsize" onClick={handleRefresh}>
+          <img src="/error.png" alt="" className="img" />
+          NC-Monitor
+        </Navbar.Brand>
         {/* <Navbar.Toggle aria-controls="basic-navbar-nav" /> */}
         {/* <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
@@ -31,7 +38,7 @@ const Header = () => {
         </Navbar.Collapse> */}
       </Container>
     </Navbar>
-  )
+  );
 };
 
 export default Header;
