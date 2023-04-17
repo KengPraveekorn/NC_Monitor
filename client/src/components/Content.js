@@ -96,26 +96,26 @@ const Content = () => {
         <Row>
           <Col xs={8}>
             <Table striped bordered hover>
-              <thead>
+              <thead className="thead">
                 <tr>
-                  <th>NCR NO.</th>
-                  <th>Detect on</th>
-                  <th>Detect at</th>
+                  <th>NCR NO</th>
+                  <th>Detect On</th>
+                  <th>Detect At</th>
                   <th>NC datail</th>
                   <th></th>
                 </tr>
               </thead>
               {searchData(value).map((item) => {
                 return (
-                  <tbody>
+                  <tbody className="tbody">
                     <tr>
                       <td>{item.ncr_no}</td>
                       <td>{item.detect_on}</td>
                       <td>{item.detect_at}</td>
                       <td>{item.nc_detail}</td>
                       <td>
-                        <Form className="mt-2">
-                          <Row>
+                        <Form>
+                          <Row className="bt-tb">
                             <Col>
                               <Button onClick={() => handdleUpdate(item._id)}>
                                 Detail
