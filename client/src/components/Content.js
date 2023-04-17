@@ -139,11 +139,11 @@ const Content = () => {
             </Table>
           </Col>
           <Col xs={4}>
-            <Card>
-              <Card.Header>NC Total</Card.Header>
+            <Card className="card">
+              <Card.Header className="card-head">NC Total</Card.Header>
               <Card.Body>
-                <Card.Title>TOTAL</Card.Title>
-                <Card.Text>{value.length}</Card.Text>
+                <Card.Title className="card-title">TOTAL</Card.Title>
+                <Card.Text className="card-text">{value.length}</Card.Text>
               </Card.Body>
             </Card>
           </Col>
