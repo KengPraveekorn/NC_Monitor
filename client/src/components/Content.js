@@ -29,6 +29,13 @@ const Content = () => {
   const [show, setShow] = useState(false);
   const [id, setId] = useState("");
 
+  const [data, setData] = useState({
+    ncr_no: "",
+    detect_on: "",
+    detect_at: "",
+    nc_detail: "",
+  });
+
   useEffect(() => {
     loadData();
     // console.log(value.length);
@@ -48,6 +55,13 @@ const Content = () => {
           item[newItem].toString().toLowerCase().indexOf(q.toLowerCase()) > -1
         );
       });
+    });
+  };
+
+  const handleChange = (e) => {
+    setData({
+      ...data,
+      [e.target.name]: e.target.value,
     });
   };
 
@@ -81,6 +95,25 @@ const Content = () => {
     console.log(id);
   };
 
+  const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
+
+  const handleUpdate = async() => {
+    // updatenc(data)
+    //   .then(() => {
+    //     console.log(id);
+    //     loadData();
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //   });
+    // console.log(id);
+    updatenc(id)
+    await delay(1000);
+    window.location.reload(true);
+
+  };
+
   const setModal = () => {
     return value
       .filter((e) => e._id == id)
@@ -110,6 +143,9 @@ const Content = () => {
                   type="text"
                   id="inputEdit"
                   placeholder={e.ncr_no}
+                  autoFocus
+                  name="ncr_no"
+                  onChange={(e) => handleChange(e)}
                 />
                 <br />
                 <h4>Detech On</h4>
@@ -117,6 +153,8 @@ const Content = () => {
                   type="text"
                   id="inputEdit"
                   placeholder={e.detect_on}
+                  name="detect_on"
+                  onChange={(e) => handleChange(e)}
                 />
                 <br />
                 <h4>Detech At</h4>
@@ -124,6 +162,8 @@ const Content = () => {
                   type="text"
                   id="inputEdit"
                   placeholder={e.detect_at}
+                  name="detect_at"
+                  onChange={(e) => handleChange(e)}
                 />
                 <br />
                 <h4>NC Detail</h4>
@@ -131,6 +171,8 @@ const Content = () => {
                   type="text"
                   id="inputEdit"
                   placeholder={e.nc_detail}
+                  name="nc_detail"
+                  onChange={(e) => handleChange(e)}
                 />
                 <br />
               </Modal.Body>
@@ -150,17 +192,7 @@ const Content = () => {
 
   const handleClose = () => setShow(false);
 
-  const handleUpdate = (idData) => {
-    updatenc(id)
-          .then(() => {
-            console.log(id);
-            loadData();
-          })
-          .catch((err) => {
-            console.log(err);
-          });
-    console.log(id);
-  };
+  
 
   return (
     <Container>
