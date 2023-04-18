@@ -21,9 +21,10 @@
   left: auto;
 }
 
-.card{
+/* .card{
     width: 300px;
-}
+} */
+
 .card-head {
   background-color: antiquewhite;
   font-size: 40px;
@@ -55,17 +56,15 @@
   justify-content: center;
 }
 
-/* .grid-row{
-    display: grid;
-
-    grid-gap: 30px;
-} */
-
 @media (min-width: 600px) {
   .grid-row {
     grid-template-columns: repeat(2,1fr);
   }
 }
+
+/* .table-bordered {
+  border-radius: 10px;
+} */
 
 
 /* Add page */

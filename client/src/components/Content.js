@@ -27,6 +27,7 @@ const Content = () => {
   const [serachParam] = useState(["ncr_no"]);
 
   const [show, setShow] = useState(false);
+  const [id, setId] = useState("");
 
   useEffect(() => {
     loadData();
@@ -61,16 +62,48 @@ const Content = () => {
       });
   };
 
-  const handdleUpdate = (id) => {
-    console.log(id);
+  const handdleUpdate = (idData) => {
+    setId(idData);
     setShow(true);
+    console.log(id);
+  };
 
-    // updatenc(id).then(()=>{
-    //   console.log(id);
-    //   loadData();
-    // }).catch((err)=>{
-    //   console.log(err);
-    // })
+
+  const setModal = () => {
+    return value
+      .filter((e) => e._id == id)
+      .map((e) => {
+        return (
+          <>
+            <Modal
+              size="lg"
+              aria-labelledby="contained-modal-title-vcenter"
+              centered
+              show={show}
+              onHide={handleClose}
+            >
+              <Modal.Header closeButton>
+                <Modal.Title id="contained-modal-title-vcenter">
+                  Detail
+                </Modal.Title>
+              </Modal.Header>
+              <Modal.Body>
+                <h4>NCR_NO</h4>
+                <p>id: {e._id}</p>
+                <h4>Detech On</h4>
+                <p>Detech On: {e.detect_on}</p>
+                <h4>Detech At</h4>
+                <p>Detech At: {e.detect_at}</p>
+                <h4>NC Detail</h4>
+                <p>NC Detail : {e.nc_detail}</p>
+              </Modal.Body>
+              <Modal.Footer>
+                <Button onClick={handleClose}>Close</Button>
+              </Modal.Footer>
+            </Modal>
+          </>
+        );
+      });
   };
 
   const handleClose = () => setShow(false);
@@ -93,9 +126,9 @@ const Content = () => {
         </Form>
       </div>
       <Form>
-        <Row className="grid-row">
-          <Col xs={9} className="col-table">
-            <Table striped bordered hover>
+        <Row>
+          <Col lg={12} xl={9}>
+            <Table striped bordered className="table-bordered"> 
               <thead className="thead">
                 <tr>
                   <th>NCR NO</th>
@@ -138,8 +171,8 @@ const Content = () => {
               })}
             </Table>
           </Col>
-          <Col>
-            <Card className="card">
+          <Col lg={3}> 
+            <Card>
               <Card.Header className="card-head">NC Total</Card.Header>
               <Card.Body>
                 <Card.Title className="card-title">TOTAL</Card.Title>
@@ -149,63 +182,8 @@ const Content = () => {
           </Col>
         </Row>
       </Form>
+      {setModal()}
 
-      <Modal
-        size="lg"
-        aria-labelledby="contained-modal-title-vcenter"
-        centered
-        show={show}
-        onHide={handleClose}
-      >
-        <Modal.Header closeButton>
-          <Modal.Title id="contained-modal-title-vcenter">Detail</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <h4>NCR_NO</h4>
-          <p>id: </p>
-          <h4>Detech On</h4>
-          <p></p>
-          <h4>Detech At</h4>
-          <p></p>
-          <h4>NC Detail</h4>
-          <p></p>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button onClick={handleClose}>Close</Button>
-        </Modal.Footer>
-      </Modal>
-
-      {/* {value.map((item) => {
-        return (
-          <Modal
-            size="lg"
-            aria-labelledby="contained-modal-title-vcenter"
-            centered
-            show={show}
-            onHide={handleClose}
-          >
-            <Modal.Header closeButton>
-              <Modal.Title id="contained-modal-title-vcenter">
-                Detail
-              </Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
-              <h4>NCR_NO</h4>
-              <p>id: {item.ncr_no}</p>
-              <h4>Detech On</h4>
-              <p>{item.detect_on}</p>
-              <h4>Detech At</h4>
-              <p>{item.detect_at}</p>
-              <h4>NC Detail</h4>
-              <p>{item.nc_detail}</p>
-            </Modal.Body>
-
-            <Modal.Footer>
-              <Button onClick={handleClose}>Close</Button>
-            </Modal.Footer>
-          </Modal>
-        );
-      })} */}
     </Container>
   );
 };
