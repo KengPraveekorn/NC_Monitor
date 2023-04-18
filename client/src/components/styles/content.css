@@ -1,72 +1,87 @@
-.d-grid{
-    margin-bottom: 20px;
+.d-grid {
+  margin-bottom: 20px;
+  display: grid;
+  grid-template-columns: 250px auto;
+}
+
+.search {
+  width: 200px;
+}
+
+.form-search {
+  margin-left: 50px;
+}
+
+.imgSeach {
+  width: 25px;
+  height: 25px;
+  display: flex;
+  position: absolute;
+  top: 95px;
+  left: auto;
+}
+
+.card{
+    width: 300px;
+}
+.card-head {
+  background-color: antiquewhite;
+  font-size: 40px;
+  font-weight: 500;
+  text-align: center;
+  color: rgb(252, 44, 3);
+}
+.card-title {
+  font-size: 30px;
+  text-align: center;
+}
+.card-text {
+  font-size: 30px;
+  text-align: center;
+}
+
+.thead {
+  background-color: rgb(159, 255, 223);
+  text-align: center;
+  font-size: 18px;
+}
+.tbody {
+  background-color: rgba(0, 0, 0, 0);
+  font-size: 16px;
+}
+.bt-tb {
+  display: grid;
+  grid-template-columns: 100px auto;
+  justify-content: center;
+}
+
+/* .grid-row{
     display: grid;
-    grid-template-columns: 250px auto;
-}
 
-.search{
-    width: 200px;
-}
+    grid-gap: 30px;
+} */
 
-.form-search{
-    margin-left: 50px;
-}
-
-.imgSeach{
-    width: 25px;
-    height: 25px;
-    display: flex;
-    position: absolute;
-    top:95px;
-    left: auto;
-}
-
-.card-head{
-    background-color: antiquewhite;
-    font-size: 40px;
-    font-weight: 500;
-    text-align: center;
-    color: rgb(252, 44, 3);
-}
-.card-title{
-    font-size: 30px;
-    text-align: center;
-}
-.card-text{
-    font-size: 30px;
-    text-align: center;
-}
-
-.thead{
-    background-color: aquamarine;
-    text-align: center;
-    font-size: 18px;
-}
-.tbody{
-    background-color:antiquewhite ;
-    font-size: 16px;
-}
-.bt-tb{
-    display: grid;
-    grid-template-columns: 100px auto;
-    justify-content: center;
+@media (min-width: 600px) {
+  .grid-row {
+    grid-template-columns: repeat(2,1fr);
+  }
 }
 
 
 /* Add page */
-.addpos{
-    margin-left: auto;
+.addpos {
+  margin-left: auto;
 }
-.bt-add{
-    background-color:rgb(65, 155, 5);
-    width: 415px;
+.bt-add {
+  background-color: rgb(65, 155, 5);
+  width: 415px;
 }
 
-.headform{
-    background-color:antiquewhite;
+.headform {
+  background-color: antiquewhite;
 }
-.imgform{
-    width: 30px;
-    height: 30px;
-    margin-right: 10px;
+.imgform {
+  width: 30px;
+  height: 30px;
+  margin-right: 10px;
 }

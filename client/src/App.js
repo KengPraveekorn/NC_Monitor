@@ -13,7 +13,7 @@ import Addpage from './components/pages/Addpage';
 
 function App() {
   return(
-    <>
+    <div className='appdiv'>
       <Header/>
       <BrowserRouter>
         <Routes>
@@ -23,7 +23,7 @@ function App() {
         </Routes>
       </BrowserRouter>
       <Footer/>
-    </>
+    </div>
   )
 }
 

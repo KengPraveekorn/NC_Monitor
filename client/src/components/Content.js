@@ -93,8 +93,8 @@ const Content = () => {
         </Form>
       </div>
       <Form>
-        <Row>
-          <Col xs={8}>
+        <Row className="grid-row">
+          <Col xs={9} className="col-table">
             <Table striped bordered hover>
               <thead className="thead">
                 <tr>
@@ -138,7 +138,7 @@ const Content = () => {
               })}
             </Table>
           </Col>
-          <Col xs={4}>
+          <Col>
             <Card className="card">
               <Card.Header className="card-head">NC Total</Card.Header>
               <Card.Body>
@@ -161,18 +161,18 @@ const Content = () => {
           <Modal.Title id="contained-modal-title-vcenter">Detail</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-              <h4>NCR_NO</h4>
-              <p>id: </p>
-              <h4>Detech On</h4>
-              <p></p>
-              <h4>Detech At</h4>
-              <p></p>
-              <h4>NC Detail</h4>
-              <p></p>
-            </Modal.Body>
-            <Modal.Footer>
-              <Button onClick={handleClose}>Close</Button>
-            </Modal.Footer>
+          <h4>NCR_NO</h4>
+          <p>id: </p>
+          <h4>Detech On</h4>
+          <p></p>
+          <h4>Detech At</h4>
+          <p></p>
+          <h4>NC Detail</h4>
+          <p></p>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button onClick={handleClose}>Close</Button>
+        </Modal.Footer>
       </Modal>
 
       {/* {value.map((item) => {
@@ -206,7 +206,6 @@ const Content = () => {
           </Modal>
         );
       })} */}
-
     </Container>
   );
 };

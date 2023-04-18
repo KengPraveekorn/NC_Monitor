@@ -1,8 +1,9 @@
 import React from 'react'
+import './styles/footer.css'
 
 const Footer = () => {
   return (
-    <div> © 2021 Copyright: Murata.com </div>
+    <div className='footer'> © 2023 Copyright: Murata.com </div>
   )
 }
 
