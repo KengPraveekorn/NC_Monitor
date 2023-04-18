@@ -1,12 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=DynaPuff&display=swap');
+
 .pos{
     margin-bottom: 20px;
-    background-color: rgb(255, 232, 232);
+    background-color: rgb(255, 199, 199);
 }
 
 .fsize{
-    font-size: 25px;
+    font-size: 35px;
     font-weight: 700;
     color: red;
+    font-family: 'DynaPuff', cursive;
 }
 
 .img{

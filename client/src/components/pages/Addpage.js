@@ -65,18 +65,17 @@ const Addpage = () => {
 
   return (
     <div>
-      <div >
-        <Button className="bt-add" onClick={handleShow}>
-          ADD +
+        <Button size="lg" className="bt-add" onClick={handleShow}>
+        <img src="/table.png" alt="table" className="imgadd"/>
+          Add NCR
         </Button>
-      </div>
 
       <Modal size="lg" show={show} onHide={handleClose}>
         <Modal.Header className="headform" closeButton>
           <img className="imgform" src="./checklist.png" alt=""/>
           <Modal.Title>NCR FORM</Modal.Title>
         </Modal.Header>
-        <Modal.Body>
+        <Modal.Body className="bodyform">
           <Form>
             <Form.Group className="mb-3">
               <Form.Label>NCR NO</Form.Label>
@@ -118,7 +117,7 @@ const Addpage = () => {
             </Form.Group>
           </Form>
         </Modal.Body>
-        <Modal.Footer>
+        <Modal.Footer className="footeradd">
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
