@@ -17,12 +17,13 @@ import "./styles/content.css";
 
 // pages element
 import Addpage from "./pages/Addpage";
+import Pagination from "./functions/Pagination";
 
 // routes auth
 import { removenc, listnc, updatenc, Readnc } from "./functions/auth";
 
-
 const Content = () => {
+
   const [value, setValue] = useState([]);
 
   const [q, setQ] = useState("");
@@ -42,29 +43,56 @@ const Content = () => {
   const navigate = useNavigate();
   const param = useParams();
 
-  const [updata, setUpdata]=useState("");
+  const [updata, setUpdata] = useState("");
+
+  // Paginaton pages
+  const [posts, setPosts] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [postsPerPage, setPostsPerPage] = useState(5);
+
+  // const Posts = () =>{
+  //   if (loading) {
+  //     return <h2>Loading...</h2>
+  //   }
+  // }
 
   useEffect(() => {
     loadData();
-    readData(param.id);
+    // readData(param.id);
+    // fetchPosts();
     // console.log(value.length);
   }, []);
 
-  const readData = (id)=>{
-    Readnc(id)
-      .then((res)=>{
-        console.log(res);
-      }).catch((err)=>{
-        console.log(err);
-      })
-  }
+  // const fetchPosts = async () => {
+  //   setLoading(true);
+  //   const res = await listnc();
+  //   setPosts(res.data);
+  //   setLoading(false);
+  // };
+
+  // Get current value
+  const indexOfLastPost = currentPage * postsPerPage;
+  const indexOfFirstPost = indexOfLastPost - postsPerPage;
+  const currentValue = value.slice(indexOfFirstPost, indexOfLastPost);
 
   const loadData = () => {
+    setLoading(true);
     listnc().then((res) => {
       console.log(res.data);
       setValue(res.data);
     });
   };
+
+  // const readData = (id) => {
+  //   Readnc(id)
+  //     .then((res) => {
+  //       console.log(res);
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
+  // };
 
   const searchData = (items) => {
     return items.filter((item) => {
@@ -84,19 +112,19 @@ const Content = () => {
   };
   // console.log(data);
 
-const handleSumbit =  () => {
+  const handleSumbit = () => {
     console.log(data);
-    updatenc(data.id,{data})
-      .then(res=>{
+    updatenc(data.id, { data })
+      .then((res) => {
         console.log(res);
-      }).catch(err=>{
-        console.log(err.response);
       })
+      .catch((err) => {
+        console.log(err.response);
+      });
 
     // await delay(1000);
     // window.location.reload(true);
   };
-
 
   const handdleRemove = (id) => {
     Swal.fire({
@@ -124,8 +152,8 @@ const handleSumbit =  () => {
 
   const handdleShow = (idData) => {
     setId(idData);
-    setData({...data, _id: id})
-    
+    setData({ ...data, _id: id });
+
     setShow(true);
     // console.log(id);
   };
@@ -133,7 +161,6 @@ const handleSumbit =  () => {
   const handleClose = () => setShow(false);
 
   const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
-
 
   // const handleUpdate = async() => {
   //   // updatenc(data)
@@ -213,7 +240,11 @@ const handleSumbit =  () => {
                 <br />
               </Modal.Body>
               <Modal.Footer>
-                <Button variant="warning" className="bt-update" onClick={handleSumbit}>
+                <Button
+                  variant="warning"
+                  className="bt-update"
+                  onClick={handleSumbit}
+                >
                   Update
                 </Button>
                 <Button className="bt-close" onClick={handleClose}>
@@ -296,6 +327,7 @@ const handleSumbit =  () => {
                 );
               })}
             </Table>
+            <Pagination postsPerPage={postsPerPage} totalPosts={posts.length}/>
           </Col>
           <Col lg={3} xl={3}>
             <Form className="addpos">
