@@ -18,6 +18,6 @@ export const removenc =async(id)=>{
     return await axios.delete(process.env.REACT_APP_API+'/ncmoni/'+ id)
 }
 // Update -> Put
-export const updatenc =async(id)=>{
-    return await axios.put(process.env.REACT_APP_API+'/ncmoni/'+ id)
+export const updatenc =async(id,value)=>{
+    return await axios.put(process.env.REACT_APP_API+'/ncmoni/'+ id,value)
 }

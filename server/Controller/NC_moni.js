@@ -41,6 +41,7 @@ exports.read = async(req,res)=>{
 exports.update = async(req,res)=>{
     try{
         console.log(req.params.id);
+        // console.log(req.body.value);
         const id = req.params.id;
         const updateNCmoni = await Nc_moni.findOneAndUpdate({_id:id},req.body,{new:true}).exec()
         res.send("Update Success")

@@ -7,7 +7,7 @@ import { addnc } from "../functions/auth";
 // import Detail from "./Detail";
 
 // CSS
-import '../styles/content.css'
+import "../styles/content.css";
 
 const Addpage = () => {
   const [show, setShow] = useState(false);
@@ -65,14 +65,14 @@ const Addpage = () => {
 
   return (
     <div>
-        <Button size="lg" className="bt-add" onClick={handleShow}>
-        <img src="/table.png" alt="table" className="imgadd"/>
-          Add NCR
-        </Button>
+      <Button size="lg" className="bt-add" onClick={handleShow}>
+        <img src="/table.png" alt="table" className="imgadd" />
+        Add NCR
+      </Button>
 
       <Modal size="lg" show={show} onHide={handleClose}>
         <Modal.Header className="headform" closeButton>
-          <img className="imgform" src="./checklist.png" alt=""/>
+          <img className="imgform" src="./checklist.png" alt="" />
           <Modal.Title>NCR FORM</Modal.Title>
         </Modal.Header>
         <Modal.Body className="bodyform">
@@ -90,7 +90,7 @@ const Addpage = () => {
             <Form.Group className="mb-3">
               <Form.Label>Detech On</Form.Label>
               <Form.Control
-                type="text"
+                type="date"
                 placeholder="Enter Detech On"
                 name="detect_on"
                 onChange={(e) => handleChange(e)}
@@ -99,7 +99,7 @@ const Addpage = () => {
             <Form.Group className="mb-3">
               <Form.Label>Detech At</Form.Label>
               <Form.Control
-                type="text"
+                type="date"
                 placeholder="Enter Detech At"
                 name="detect_at"
                 onChange={(e) => handleChange(e)}
@@ -118,15 +118,15 @@ const Addpage = () => {
           </Form>
         </Modal.Body>
         <Modal.Footer className="footeradd">
-          <Button variant="secondary" onClick={handleClose}>
-            Close
-          </Button>
           <Button
-            variant="primary"
+            variant="success"
             disabled={data.ncr_no.length < 9 || data.ncr_no.length > 9}
             onClick={handdleSave}
           >
-            Save Changes
+            Save
+          </Button>
+          <Button variant="danger" onClick={handleClose}>
+            Close
           </Button>
         </Modal.Footer>
       </Modal>

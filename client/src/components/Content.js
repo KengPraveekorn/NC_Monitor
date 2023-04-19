@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import {
   Card,
   Col,
@@ -18,7 +19,8 @@ import "./styles/content.css";
 import Addpage from "./pages/Addpage";
 
 // routes auth
-import { removenc, listnc, updatenc } from "./functions/auth";
+import { removenc, listnc, updatenc, Readnc } from "./functions/auth";
+
 
 const Content = () => {
   const [value, setValue] = useState([]);
@@ -30,16 +32,32 @@ const Content = () => {
   const [id, setId] = useState("");
 
   const [data, setData] = useState({
+    _id: "",
     ncr_no: "",
     detect_on: "",
     detect_at: "",
     nc_detail: "",
   });
 
+  const navigate = useNavigate();
+  const param = useParams();
+
+  const [updata, setUpdata]=useState("");
+
   useEffect(() => {
     loadData();
+    readData(param.id);
     // console.log(value.length);
   }, []);
+
+  const readData = (id)=>{
+    Readnc(id)
+      .then((res)=>{
+        console.log(res);
+      }).catch((err)=>{
+        console.log(err);
+      })
+  }
 
   const loadData = () => {
     listnc().then((res) => {
@@ -64,6 +82,21 @@ const Content = () => {
       [e.target.name]: e.target.value,
     });
   };
+  // console.log(data);
+
+const handleSumbit =  () => {
+    console.log(data);
+    updatenc(data.id,{data})
+      .then(res=>{
+        console.log(res);
+      }).catch(err=>{
+        console.log(err.response);
+      })
+
+    // await delay(1000);
+    // window.location.reload(true);
+  };
+
 
   const handdleRemove = (id) => {
     Swal.fire({
@@ -91,28 +124,31 @@ const Content = () => {
 
   const handdleShow = (idData) => {
     setId(idData);
+    setData({...data, _id: id})
+    
     setShow(true);
-    console.log(id);
+    // console.log(id);
   };
+
+  const handleClose = () => setShow(false);
 
   const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
 
-  const handleUpdate = async() => {
-    // updatenc(data)
-    //   .then(() => {
-    //     console.log(id);
-    //     loadData();
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //   });
-    // console.log(id);
-    updatenc(id)
-    await delay(1000);
-    window.location.reload(true);
-
-  };
+  // const handleUpdate = async() => {
+  //   // updatenc(data)
+  //   //   .then(() => {
+  //   //     console.log(id);
+  //   //     loadData();
+  //   //   })
+  //   //   .catch((err) => {
+  //   //     console.log(err);
+  //   //   });
+  //   // console.log(id);
+  //   updatenc(id)
+  //   await delay(1000);
+  //   window.location.reload(true);
+  // };
 
   const setModal = () => {
     return value
@@ -150,7 +186,7 @@ const Content = () => {
                 <br />
                 <h4>Detech On</h4>
                 <Form.Control
-                  type="text"
+                  type="date"
                   id="inputEdit"
                   placeholder={e.detect_on}
                   name="detect_on"
@@ -159,7 +195,7 @@ const Content = () => {
                 <br />
                 <h4>Detech At</h4>
                 <Form.Control
-                  type="text"
+                  type="date"
                   id="inputEdit"
                   placeholder={e.detect_at}
                   name="detect_at"
@@ -177,7 +213,7 @@ const Content = () => {
                 <br />
               </Modal.Body>
               <Modal.Footer>
-                <Button className="bt-update" onClick={handleUpdate}>
+                <Button variant="warning" className="bt-update" onClick={handleSumbit}>
                   Update
                 </Button>
                 <Button className="bt-close" onClick={handleClose}>
@@ -189,10 +225,6 @@ const Content = () => {
         );
       });
   };
-
-  const handleClose = () => setShow(false);
-
-  
 
   return (
     <Container>
