@@ -18,12 +18,12 @@ import "./styles/content.css";
 // pages element
 import Addpage from "./pages/Addpage";
 import Pagination from "./functions/Pagination";
+import Posts from "./pages/Posts";
 
 // routes auth
 import { removenc, listnc, updatenc, Readnc } from "./functions/auth";
 
-const Content = () => {
-
+const Content = ({ totalPosts }) => {
   const [value, setValue] = useState([]);
 
   const [q, setQ] = useState("");
@@ -50,6 +50,7 @@ const Content = () => {
   const [loading, setLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage, setPostsPerPage] = useState(5);
+  const pageNumbers = [];
 
   useEffect(() => {
     loadData();
@@ -61,7 +62,10 @@ const Content = () => {
   // Get current value
   const indexOfLastPost = currentPage * postsPerPage;
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
-  const currentValue = value.slice(indexOfFirstPost, indexOfLastPost);
+  const currentPosts = value.slice(indexOfFirstPost, indexOfLastPost);
+
+    // Change page
+    const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   const loadData = () => {
     setLoading(true);
@@ -219,6 +223,7 @@ const Content = () => {
       });
   };
 
+
   return (
     <Container>
       <div className="d-grid">
@@ -247,7 +252,7 @@ const Content = () => {
                   <th>Edit/Delete</th>
                 </tr>
               </thead>
-              {searchData(value).map((item,index) => {
+              {searchData(value).map((item, index) => {
                 return (
                   <tbody className="tbody">
                     <tr>
@@ -291,7 +296,14 @@ const Content = () => {
                 );
               })}
             </Table>
-            <Pagination postsPerPage={postsPerPage} totalPosts={posts.length}/>
+            <Posts
+              posts={currentPosts}
+              loading={loading}
+              postsPerPage={postsPerPage}
+              totalPosts={value.length}
+              paginate={paginate}
+            />
+            <Pagination postsPerPage={postsPerPage} totalPosts={posts.length} />
           </Col>
           <Col lg={3} xl={3}>
             <Form className="addpos">

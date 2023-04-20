@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Form, Table } from "react-bootstrap";
 
-const Posts = ({ posts, loading, postsPerPage, totalPosts}) => {
-    const [myApi, setMyApi] = useState([]);
+const Posts = ({ posts, loading, postsPerPage, totalPosts,paginate }) => {
+  const [myApi, setMyApi] = useState([]);
   const [q, setQ] = useState("");
   const [serachParam] = useState(["ncr_no"]);
   const pageNumbers = [];
@@ -28,7 +28,7 @@ const Posts = ({ posts, loading, postsPerPage, totalPosts}) => {
 
   return (
     <div>
-      <Form className="search">
+      {/* <Form className="search">
         <img src="/search.png" alt="" className="imgSeach" />
         <Form.Control
           className="form-search"
@@ -59,8 +59,8 @@ const Posts = ({ posts, loading, postsPerPage, totalPosts}) => {
             </tbody>
           );
         })}
-      </Table>
-      {/* <nav>
+      </Table> */}
+      <nav>
         <ul className="pagination">
           {pageNumbers.map((number) => (
             <li key={number} className="page-item">
@@ -74,7 +74,7 @@ const Posts = ({ posts, loading, postsPerPage, totalPosts}) => {
             </li>
           ))}
         </ul>
-      </nav> */}
+      </nav>
     </div>
   );
 };
