@@ -51,25 +51,12 @@ const Content = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage, setPostsPerPage] = useState(5);
 
-  // const Posts = () =>{
-  //   if (loading) {
-  //     return <h2>Loading...</h2>
-  //   }
-  // }
-
   useEffect(() => {
     loadData();
     // readData(param.id);
     // fetchPosts();
     // console.log(value.length);
   }, []);
-
-  // const fetchPosts = async () => {
-  //   setLoading(true);
-  //   const res = await listnc();
-  //   setPosts(res.data);
-  //   setLoading(false);
-  // };
 
   // Get current value
   const indexOfLastPost = currentPage * postsPerPage;
@@ -83,16 +70,6 @@ const Content = () => {
       setValue(res.data);
     });
   };
-
-  // const readData = (id) => {
-  //   Readnc(id)
-  //     .then((res) => {
-  //       console.log(res);
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-  // };
 
   const searchData = (items) => {
     return items.filter((item) => {
@@ -161,21 +138,6 @@ const Content = () => {
   const handleClose = () => setShow(false);
 
   const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
-
-  // const handleUpdate = async() => {
-  //   // updatenc(data)
-  //   //   .then(() => {
-  //   //     console.log(id);
-  //   //     loadData();
-  //   //   })
-  //   //   .catch((err) => {
-  //   //     console.log(err);
-  //   //   });
-  //   // console.log(id);
-  //   updatenc(id)
-  //   await delay(1000);
-  //   window.location.reload(true);
-  // };
 
   const setModal = () => {
     return value
@@ -277,6 +239,7 @@ const Content = () => {
             <Table striped bordered className="table-bordered">
               <thead className="thead">
                 <tr>
+                  <th>No.</th>
                   <th>NCR NO</th>
                   <th>Detect On</th>
                   <th>Detect At</th>
@@ -284,10 +247,11 @@ const Content = () => {
                   <th>Edit/Delete</th>
                 </tr>
               </thead>
-              {searchData(value).map((item) => {
+              {searchData(value).map((item,index) => {
                 return (
                   <tbody className="tbody">
                     <tr>
+                      <th>{index + 1}</th>
                       <td>{item.ncr_no}</td>
                       <td>{item.detect_on}</td>
                       <td>{item.detect_at}</td>

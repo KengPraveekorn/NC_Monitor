@@ -9,7 +9,8 @@ import Footer from './components/Footer';
 
 // Page
 import Addpage from './components/pages/Addpage';
-// import postaxios from './components/functions/postaxios'
+import TPagination from './components/pages/TPagination';
+import MindPaginate from './components/functions/MindPaginate';
 
 function App() {
   return(
@@ -19,7 +20,8 @@ function App() {
         <Routes>
           <Route path='/' element={<Content/>}/>
           <Route path='/addnc' element={<Addpage/>}/>
-          {/* <Route path='/post' element={<postaxios/>}/> */}
+          <Route path='/paginate' element={<TPagination/>}/>
+          <Route path='/pgnt' element={<MindPaginate/>}/>
         </Routes>
       </BrowserRouter>
       <Footer/>
