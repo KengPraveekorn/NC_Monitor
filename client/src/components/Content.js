@@ -144,16 +144,35 @@ const Content = ({ totalPosts }) => {
   // console.log(data);
 
   const handleClick = (e) => {
-    setData(data);
-    update(e.target.value);
-    console.log(e.target.value);
+    const dt = JSON.stringify(data)
+    console.log(dt);
+    updatenc(id,data)
+    .then((res) => {
+      console.log(res.data);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+
+    // setData(data);
+    // update(e.target.value);
+    // console.log(e.target.value);
+    // removenc(id)
+    // .then(() => {
+    //   console.log(id);
+    //   loadData();
+    // })
+
+    // addnc(data);
+    // await delay(1000);
+    // window.location.reload(true);
   };
 
   const update = (id) => {
-    data["_id"] = id
-    console.log(data);
-    const dt = JSON.stringify(data);
-    updatenc(dt)
+    // data["_id"] = id
+    // console.log(data);
+    // const dt = JSON.stringify(data);
+    updatenc(id,data)
       .then((res) => {
         console.log(res.data);
       })
@@ -186,6 +205,17 @@ const Content = ({ totalPosts }) => {
                 </Modal.Title>
               </Modal.Header>
               <Modal.Body>
+              <h4>ID</h4>
+                <Form.Control
+                  type="text"
+                  id="inputEdit"
+                  placeholder={e._id}
+                  autoFocus
+                  name="_id"
+                  disabled
+                  onChange={(e) => handleChange(e)}
+                />
+                <br />
                 <h4>NCR NO</h4>
                 <Form.Control
                   type="text"
@@ -195,7 +225,7 @@ const Content = ({ totalPosts }) => {
                   name="ncr_no"
                   // value={e.ncr_no}
                   // disabled
-                  onKeyUp={(e) => handleChange(e)}
+                  onChange={(e) => handleChange(e)}
                 />
                 <br />
                 <h4>Detech On</h4>

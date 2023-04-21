@@ -21,7 +21,3 @@ export const removenc =async(id)=>{
 export const updatenc =async(id,value)=>{
     return await axios.put(process.env.REACT_APP_API+'/ncmoni/'+ id,value)
 }
-
-export const edit = async(data)=>{
-    return await axios.put(process.env.REACT_APP_API+'/ncmoni/'+ data)
-}
