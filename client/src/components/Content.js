@@ -21,7 +21,7 @@ import Pagination from "./functions/Pagination";
 import Posts from "./pages/Posts";
 
 // routes auth
-import { removenc, listnc, updatenc, Readnc } from "./functions/auth";
+import { removenc, listnc, updatenc, Readnc, edit } from "./functions/auth";
 
 const Content = ({ totalPosts }) => {
   const [value, setValue] = useState([]);
@@ -64,8 +64,8 @@ const Content = ({ totalPosts }) => {
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
   const currentPosts = value.slice(indexOfFirstPost, indexOfLastPost);
 
-    // Change page
-    const paginate = (pageNumber) => setCurrentPage(pageNumber);
+  // Change page
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   const loadData = () => {
     setLoading(true);
@@ -84,14 +84,6 @@ const Content = ({ totalPosts }) => {
       });
     });
   };
-
-  const handleChange = (e) => {
-    setData({
-      ...data,
-      [e.target.name]: e.target.value,
-    });
-  };
-  // console.log(data);
 
   const handleSumbit = () => {
     console.log(data);
@@ -133,15 +125,42 @@ const Content = ({ totalPosts }) => {
 
   const handdleShow = (idData) => {
     setId(idData);
-    setData({ ...data, _id: id });
+    setData({ ...data });
 
     setShow(true);
-    // console.log(id);
+    console.log(id);
   };
 
   const handleClose = () => setShow(false);
 
   const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
+  const handleChange = (e) => {
+    setData({
+      ...data,
+      [e.target.name]: e.target.value,
+    });
+  };
+  // console.log(data);
+
+  const handleClick = (e) => {
+    setData(data);
+    update(e.target.value);
+    console.log(e.target.value);
+  };
+
+  const update = (id) => {
+    data["_id"] = id
+    console.log(data);
+    const dt = JSON.stringify(data);
+    updatenc(dt)
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   const setModal = () => {
     return value
@@ -174,7 +193,9 @@ const Content = ({ totalPosts }) => {
                   placeholder={e.ncr_no}
                   autoFocus
                   name="ncr_no"
-                  onChange={(e) => handleChange(e)}
+                  // value={e.ncr_no}
+                  // disabled
+                  onKeyUp={(e) => handleChange(e)}
                 />
                 <br />
                 <h4>Detech On</h4>
@@ -209,7 +230,8 @@ const Content = ({ totalPosts }) => {
                 <Button
                   variant="warning"
                   className="bt-update"
-                  onClick={handleSumbit}
+                  value={e._id}
+                  onClick={handleClick}
                 >
                   Update
                 </Button>
@@ -222,7 +244,6 @@ const Content = ({ totalPosts }) => {
         );
       });
   };
-
 
   return (
     <Container>
@@ -320,7 +341,7 @@ const Content = ({ totalPosts }) => {
           </Col>
         </Row>
       </Form>
-      {setModal()}
+      <Form>{setModal()}</Form>
     </Container>
   );
 };
