@@ -40,11 +40,9 @@ exports.read = async(req,res)=>{
 // Update (Put)
 exports.update = async(req,res)=>{
     try{
-        console.log(req.params.id);
-        // console.log(req.body.value);
+        console.log(req.body);
         const id = req.params.id;
-        // const dt = JSON.parse(id)
-        // console.log(dt);
+        console.log(id);
         const updateNCmoni = await Nc_moni.findOneAndUpdate({_id:id},req.body,{new:true}).exec()
         res.send("Update Success")
     }catch(err){
@@ -53,7 +51,7 @@ exports.update = async(req,res)=>{
     }
 }
 
-// Delete
+// Remove (Delete)
 exports.remove = async(req,res)=>{
     try{
         console.log(req.params.id);

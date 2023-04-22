@@ -33,7 +33,6 @@ const Content = ({ totalPosts }) => {
   const [id, setId] = useState("");
 
   const [data, setData] = useState({
-    _id: "",
     ncr_no: "",
     detect_on: "",
     detect_at: "",
@@ -54,9 +53,6 @@ const Content = ({ totalPosts }) => {
 
   useEffect(() => {
     loadData();
-    // readData(param.id);
-    // fetchPosts();
-    // console.log(value.length);
   }, []);
 
   // Get current value
@@ -83,20 +79,6 @@ const Content = ({ totalPosts }) => {
         );
       });
     });
-  };
-
-  const handleSumbit = () => {
-    console.log(data);
-    updatenc(data.id, { data })
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((err) => {
-        console.log(err.response);
-      });
-
-    // await delay(1000);
-    // window.location.reload(true);
   };
 
   const handdleRemove = (id) => {
@@ -130,11 +112,11 @@ const Content = ({ totalPosts }) => {
     setShow(true);
     console.log(id);
   };
-
   const handleClose = () => setShow(false);
 
   const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
+  // Update func -----------------------------------
   const handleChange = (e) => {
     setData({
       ...data,
@@ -143,43 +125,27 @@ const Content = ({ totalPosts }) => {
   };
   // console.log(data);
 
-  const handleClick = (e) => {
-    const dt = JSON.stringify(data)
-    console.log(dt);
-    updatenc(id,data)
-    .then((res) => {
-      console.log(res.data);
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-
-    // setData(data);
-    // update(e.target.value);
-    // console.log(e.target.value);
-    // removenc(id)
-    // .then(() => {
-    //   console.log(id);
-    //   loadData();
-    // })
-
-    // addnc(data);
-    // await delay(1000);
-    // window.location.reload(true);
-  };
-
-  const update = (id) => {
-    // data["_id"] = id
-    // console.log(data);
-    // const dt = JSON.stringify(data);
-    updatenc(id,data)
+  const handleClick = async (e) => {
+    let id = e.target.value; // get ค่า value id จากปุ่ม update
+    updatenc(id, data) // ส่งค่า _id และค่าที่รับมาจาก form ไปหลังบ้านและ update ค่า
       .then((res) => {
         console.log(res.data);
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: "Update Success",
+          showConfirmButton: false,
+          timer: 1500,
+        });
       })
       .catch((err) => {
         console.log(err);
       });
+    await delay(1000);
+    window.location.reload(true);
   };
+
+  // -----------------------------------
 
   const setModal = () => {
     return value
@@ -205,17 +171,6 @@ const Content = ({ totalPosts }) => {
                 </Modal.Title>
               </Modal.Header>
               <Modal.Body>
-              <h4>ID</h4>
-                <Form.Control
-                  type="text"
-                  id="inputEdit"
-                  placeholder={e._id}
-                  autoFocus
-                  name="_id"
-                  disabled
-                  onChange={(e) => handleChange(e)}
-                />
-                <br />
                 <h4>NCR NO</h4>
                 <Form.Control
                   type="text"
@@ -223,8 +178,6 @@ const Content = ({ totalPosts }) => {
                   placeholder={e.ncr_no}
                   autoFocus
                   name="ncr_no"
-                  // value={e.ncr_no}
-                  // disabled
                   onChange={(e) => handleChange(e)}
                 />
                 <br />
@@ -260,8 +213,13 @@ const Content = ({ totalPosts }) => {
                 <Button
                   variant="warning"
                   className="bt-update"
-                  value={e._id}
+                  value={e._id} // รับค่า _id จาก map เก็บไว้ใน value
                   onClick={handleClick}
+                  disabled={
+                    data.ncr_no.length < 9 ||
+                    data.ncr_no.length > 9 ||
+                    data.nc_detail.length == ""
+                  }
                 >
                   Update
                 </Button>
